@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile - Resume Builder</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: nav}"></div>
+<div class="page">
+    <h1>Profile Management</h1>
+    <p class="alert success" th:if="${saved}">Profile updated successfully.</p>
+
+    <form th:action="@{/profile}" th:object="${user}" method="post" class="form-card">
+        <label>Full Name</label>
+        <input type="text" th:field="*{fullName}" required/>
+
+        <label>Email (login id, read-only)</label>
+        <input type="email" th:value="${user.email}" disabled/>
+
+        <label>Phone</label>
+        <input type="text" th:field="*{phone}"/>
+
+        <label>Address</label>
+        <input type="text" th:field="*{address}"/>
+
+        <label>Profile Summary</label>
+        <textarea th:field="*{profileSummary}" rows="4" placeholder="A short summary that appears at the top of your resume"></textarea>
+
+        <button type="submit">Save Changes</button>
+    </form>
+</div>
+</body>
+</html>

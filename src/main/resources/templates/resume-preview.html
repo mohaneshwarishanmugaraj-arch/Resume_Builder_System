@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Preview - Resume Builder</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: nav}"></div>
+<div class="page">
+    <h1>Resume Preview</h1>
+    <p class="muted">Choose a template, then download your resume as a PDF.</p>
+
+    <div class="template-picker">
+        <a th:each="t : ${templates}"
+           th:href="@{/resume/download(style=${t.styleKey})}"
+           class="template-card">
+            <h3 th:text="${t.templateName}"></h3>
+            <p th:text="${t.description}"></p>
+            <span class="btn-primary">Download as PDF</span>
+        </a>
+    </div>
+
+    <hr/>
+
+    <div class="resume-sheet">
+        <h2 th:text="${user.fullName}"></h2>
+        <p class="muted" th:text="${user.email} + ' | ' + ${user.phone} + ' | ' + ${user.address}"></p>
+        <p th:if="${user.profileSummary}" th:text="${user.profileSummary}"></p>
+
+        <h3 th:if="${!#lists.isEmpty(user.educationList)}">Education</h3>
+        <div th:each="e : ${user.educationList}">
+            <strong th:text="${e.degree} + ' - ' + ${e.institution}"></strong>
+            <div class="muted" th:text="${e.boardOrUniversity} + '  ' + ${e.yearOfPassing} + '  ' + ${e.percentageOrCgpa}"></div>
+        </div>
+
+        <h3 th:if="${!#lists.isEmpty(user.experienceList)}">Experience</h3>
+        <div th:each="ex : ${user.experienceList}">
+            <strong th:text="${ex.jobRole} + ' - ' + ${ex.companyName}"></strong>
+            <div class="muted" th:text="${ex.startDate} + ' to ' + ${ex.endDate}"></div>
+            <p th:text="${ex.description}"></p>
+        </div>
+
+        <h3 th:if="${!#lists.isEmpty(user.skillList)}">Skills</h3>
+        <p>
+            <span th:each="s, iter : ${user.skillList}">
+                <span th:text="${s.skillName}"></span><span th:if="${!iter.last}">, </span>
+            </span>
+        </p>
+
+        <h3 th:if="${!#lists.isEmpty(user.projectList)}">Projects</h3>
+        <div th:each="p : ${user.projectList}">
+            <strong th:text="${p.title}"></strong>
+            <div class="muted" th:text="${p.technologiesUsed}"></div>
+            <p th:text="${p.description}"></p>
+        </div>
+
+        <h3 th:if="${!#lists.isEmpty(user.certificationList)}">Certifications</h3>
+        <ul>
+            <li th:each="c : ${user.certificationList}" th:text="${c.certificationName} + ' - ' + ${c.issuingOrganization}"></li>
+        </ul>
+
+        <h3 th:if="${!#lists.isEmpty(user.achievementList)}">Achievements</h3>
+        <ul>
+            <li th:each="a : ${user.achievementList}" th:text="${a.title}"></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

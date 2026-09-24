@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Resume Builder</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar-brand">🛠 Admin Panel</div>
+    <div class="navbar-links">
+        <a th:href="@{/admin/dashboard}">Dashboard</a>
+        <a th:href="@{/admin/templates}">Templates</a>
+        <a th:href="@{/admin/users}">Users</a>
+        <a th:href="@{/logout}" class="logout">Logout</a>
+    </div>
+</nav>
+<div class="page">
+    <h1>Platform Usage</h1>
+    <div class="stat-grid">
+        <div class="stat-card">
+            <div class="stat-number" th:text="${totalUsers}"></div>
+            <div class="stat-label">Registered Users</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" th:text="${totalTemplates}"></div>
+            <div class="stat-label">Resume Templates</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" th:text="${totalResumesGenerated}"></div>
+            <div class="stat-label">Resumes Generated</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Skills - Resume Builder</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: nav}"></div>
+<div class="page">
+    <h1>Skills</h1>
+
+    <form th:action="@{/skills/add}" th:object="${skill}" method="post" class="form-card">
+        <div class="form-row">
+            <div>
+                <label>Skill Name</label>
+                <input type="text" th:field="*{skillName}" placeholder="e.g. Java, React, SQL" required/>
+            </div>
+            <div>
+                <label>Proficiency Level</label>
+                <select th:field="*{proficiencyLevel}">
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                    <option value="Expert">Expert</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit">Add Skill</button>
+    </form>
+
+    <table class="data-table">
+        <thead><tr><th>Skill</th><th>Proficiency</th><th></th></tr></thead>
+        <tbody>
+        <tr th:each="s : ${skillList}">
+            <td th:text="${s.skillName}"></td>
+            <td th:text="${s.proficiencyLevel}"></td>
+            <td>
+                <form th:action="@{/skills/delete/{id}(id=${s.id})}" method="post">
+                    <button type="submit" class="btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

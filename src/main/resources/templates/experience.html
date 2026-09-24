@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Experience - Resume Builder</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: nav}"></div>
+<div class="page">
+    <h1>Experience Management</h1>
+
+    <form th:action="@{/experience/add}" th:object="${experience}" method="post" class="form-card">
+        <div class="form-row">
+            <div>
+                <label>Job Role</label>
+                <input type="text" th:field="*{jobRole}" required/>
+            </div>
+            <div>
+                <label>Company Name</label>
+                <input type="text" th:field="*{companyName}" required/>
+            </div>
+        </div>
+        <div class="form-row">
+            <div>
+                <label>Start Date</label>
+                <input type="text" th:field="*{startDate}" placeholder="e.g. Jun 2024"/>
+            </div>
+            <div>
+                <label>End Date</label>
+                <input type="text" th:field="*{endDate}" placeholder="e.g. Present"/>
+            </div>
+        </div>
+        <label>Description</label>
+        <textarea th:field="*{description}" rows="3" placeholder="Key responsibilities and achievements"></textarea>
+        <button type="submit">Add Experience</button>
+    </form>
+
+    <table class="data-table">
+        <thead>
+        <tr><th>Role</th><th>Company</th><th>Duration</th><th>Description</th><th></th></tr>
+        </thead>
+        <tbody>
+        <tr th:each="ex : ${experienceList}">
+            <td th:text="${ex.jobRole}"></td>
+            <td th:text="${ex.companyName}"></td>
+            <td th:text="${ex.startDate} + ' - ' + ${ex.endDate}"></td>
+            <td th:text="${ex.description}"></td>
+            <td>
+                <form th:action="@{/experience/delete/{id}(id=${ex.id})}" method="post">
+                    <button type="submit" class="btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

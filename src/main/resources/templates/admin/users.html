@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users - Admin</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar-brand">🛠 Admin Panel</div>
+    <div class="navbar-links">
+        <a th:href="@{/admin/dashboard}">Dashboard</a>
+        <a th:href="@{/admin/templates}">Templates</a>
+        <a th:href="@{/admin/users}">Users</a>
+        <a th:href="@{/logout}" class="logout">Logout</a>
+    </div>
+</nav>
+<div class="page">
+    <h1>Registered Users</h1>
+    <table class="data-table">
+        <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Joined</th></tr></thead>
+        <tbody>
+        <tr th:each="u : ${users}">
+            <td th:text="${u.fullName}"></td>
+            <td th:text="${u.email}"></td>
+            <td th:text="${u.role}"></td>
+            <td th:text="${u.createdAt}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Achievements - Resume Builder</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: nav}"></div>
+<div class="page">
+    <h1>Achievements</h1>
+
+    <form th:action="@{/achievements/add}" th:object="${achievement}" method="post" class="form-card">
+        <label>Title</label>
+        <input type="text" th:field="*{title}" required/>
+
+        <label>Date Achieved</label>
+        <input type="text" th:field="*{dateAchieved}" placeholder="e.g. Aug 2025"/>
+
+        <label>Description</label>
+        <textarea th:field="*{description}" rows="2"></textarea>
+
+        <button type="submit">Add Achievement</button>
+    </form>
+
+    <table class="data-table">
+        <thead><tr><th>Title</th><th>Date</th><th>Description</th><th></th></tr></thead>
+        <tbody>
+        <tr th:each="a : ${achievementList}">
+            <td th:text="${a.title}"></td>
+            <td th:text="${a.dateAchieved}"></td>
+            <td th:text="${a.description}"></td>
+            <td>
+                <form th:action="@{/achievements/delete/{id}(id=${a.id})}" method="post">
+                    <button type="submit" class="btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

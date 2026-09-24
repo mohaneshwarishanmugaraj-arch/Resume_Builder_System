@@ -1,0 +1,108 @@
+:root {
+    --primary: #1e5aa0;
+    --primary-dark: #164478;
+    --bg: #f4f6f9;
+    --card-bg: #ffffff;
+    --text: #222;
+    --muted: #6b7280;
+    --danger: #c0392b;
+    --border: #e2e5ea;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* Auth pages */
+.auth-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--primary) 0%, #0f2a4a 100%);
+}
+.auth-card {
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 12px;
+    width: 360px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.auth-card h1 { margin: 0 0 4px; font-size: 22px; }
+.subtitle { color: var(--muted); margin-top: 0; margin-bottom: 20px; font-size: 14px; }
+.auth-card label { display: block; margin: 12px 0 4px; font-size: 13px; font-weight: 600; }
+.auth-card input {
+    width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px;
+}
+.auth-card button {
+    margin-top: 20px; width: 100%; padding: 11px; background: var(--primary); color: #fff;
+    border: none; border-radius: 6px; font-size: 15px; cursor: pointer;
+}
+.auth-card button:hover { background: var(--primary-dark); }
+.auth-switch { text-align: center; margin-top: 16px; font-size: 13px; }
+.auth-hint { text-align: center; margin-top: 8px; font-size: 11px; color: var(--muted); }
+.field-error { color: var(--danger); font-size: 12px; margin: 2px 0 0; }
+.alert { padding: 10px; border-radius: 6px; font-size: 13px; }
+.alert.success { background: #e6f4ea; color: #1e7e34; }
+.alert.error { background: #fdecea; color: var(--danger); }
+
+/* Navbar */
+.navbar {
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--primary); color: #fff; padding: 14px 30px;
+}
+.navbar-brand { font-weight: 700; font-size: 18px; }
+.navbar-links a {
+    color: #eaf1fb; text-decoration: none; margin-left: 18px; font-size: 14px;
+}
+.navbar-links a:hover { text-decoration: underline; }
+.navbar-links a.highlight { background: #fff; color: var(--primary); padding: 6px 12px; border-radius: 6px; }
+.navbar-links a.logout { color: #ffd3d0; }
+
+/* Page layout */
+.page { max-width: 960px; margin: 30px auto; padding: 0 20px 60px; }
+.page h1 { margin-bottom: 4px; }
+.muted { color: var(--muted); }
+
+/* Stat cards */
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin: 24px 0; }
+.stat-card { background: var(--card-bg); border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+.stat-number { font-size: 28px; font-weight: 700; color: var(--primary); }
+.stat-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+/* Forms */
+.form-card { background: var(--card-bg); padding: 22px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); margin-bottom: 24px; }
+.form-card label { display: block; font-size: 13px; font-weight: 600; margin: 10px 0 4px; }
+.form-card input, .form-card textarea, .form-card select {
+    width: 100%; padding: 9px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px; font-family: inherit;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.form-row > div:only-child { grid-column: 1 / -1; }
+.form-card button, .btn-primary {
+    margin-top: 16px; padding: 10px 18px; background: var(--primary); color: #fff; border: none;
+    border-radius: 6px; font-size: 14px; cursor: pointer; text-decoration: none; display: inline-block;
+}
+.form-card button:hover, .btn-primary:hover { background: var(--primary-dark); }
+.btn-danger { background: var(--danger); color: #fff; border: none; padding: 6px 10px; border-radius: 5px; cursor: pointer; font-size: 12px; }
+.btn-secondary { background: #6b7280; color: #fff; border: none; padding: 6px 10px; border-radius: 5px; cursor: pointer; font-size: 12px; }
+
+/* Tables */
+.data-table { width: 100%; border-collapse: collapse; background: var(--card-bg); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+.data-table th, .data-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 13px; text-align: left; }
+.data-table th { background: #f0f2f6; }
+
+/* Resume preview */
+.template-picker { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 20px 0; }
+.template-card {
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 18px;
+    text-decoration: none; color: var(--text); display: block;
+}
+.template-card h3 { margin: 0 0 6px; color: var(--primary); }
+.template-card p { font-size: 13px; color: var(--muted); }
+.resume-sheet { background: var(--card-bg); padding: 30px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+.resume-sheet h3 { border-bottom: 2px solid var(--primary); padding-bottom: 4px; margin-top: 22px; }

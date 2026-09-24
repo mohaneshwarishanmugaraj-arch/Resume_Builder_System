@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Certifications - Resume Builder</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: nav}"></div>
+<div class="page">
+    <h1>Skills &amp; Certifications - Certifications</h1>
+
+    <form th:action="@{/certifications/add}" th:object="${certification}" method="post" class="form-card">
+        <div class="form-row">
+            <div>
+                <label>Certification Name</label>
+                <input type="text" th:field="*{certificationName}" required/>
+            </div>
+            <div>
+                <label>Issuing Organization</label>
+                <input type="text" th:field="*{issuingOrganization}"/>
+            </div>
+            <div>
+                <label>Issue Date</label>
+                <input type="text" th:field="*{issueDate}" placeholder="e.g. Mar 2025"/>
+            </div>
+        </div>
+        <button type="submit">Add Certification</button>
+    </form>
+
+    <table class="data-table">
+        <thead><tr><th>Certification</th><th>Organization</th><th>Date</th><th></th></tr></thead>
+        <tbody>
+        <tr th:each="c : ${certificationList}">
+            <td th:text="${c.certificationName}"></td>
+            <td th:text="${c.issuingOrganization}"></td>
+            <td th:text="${c.issueDate}"></td>
+            <td>
+                <form th:action="@{/certifications/delete/{id}(id=${c.id})}" method="post">
+                    <button type="submit" class="btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Templates - Admin</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar-brand">🛠 Admin Panel</div>
+    <div class="navbar-links">
+        <a th:href="@{/admin/dashboard}">Dashboard</a>
+        <a th:href="@{/admin/templates}">Templates</a>
+        <a th:href="@{/admin/users}">Users</a>
+        <a th:href="@{/logout}" class="logout">Logout</a>
+    </div>
+</nav>
+<div class="page">
+    <h1>Manage Resume Templates</h1>
+
+    <form th:action="@{/admin/templates/add}" th:object="${template}" method="post" class="form-card">
+        <div class="form-row">
+            <div>
+                <label>Template Name</label>
+                <input type="text" th:field="*{templateName}" required/>
+            </div>
+            <div>
+                <label>Style Key</label>
+                <input type="text" th:field="*{styleKey}" placeholder="classic or modern"/>
+            </div>
+        </div>
+        <label>Description</label>
+        <input type="text" th:field="*{description}"/>
+        <button type="submit">Add Template</button>
+    </form>
+
+    <table class="data-table">
+        <thead><tr><th>Name</th><th>Style Key</th><th>Description</th><th>Active</th><th></th></tr></thead>
+        <tbody>
+        <tr th:each="t : ${templates}">
+            <td th:text="${t.templateName}"></td>
+            <td th:text="${t.styleKey}"></td>
+            <td th:text="${t.description}"></td>
+            <td th:text="${t.active} ? 'Yes' : 'No'"></td>
+            <td>
+                <form th:action="@{/admin/templates/toggle/{id}(id=${t.id})}" method="post" style="display:inline">
+                    <button type="submit" class="btn-secondary">Toggle</button>
+                </form>
+                <form th:action="@{/admin/templates/delete/{id}(id=${t.id})}" method="post" style="display:inline">
+                    <button type="submit" class="btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

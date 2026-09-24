@@ -1,0 +1,15 @@
+<nav xmlns:th="http://www.thymeleaf.org" th:fragment="nav" class="navbar">
+    <div class="navbar-brand">📄 Resume Builder</div>
+    <div class="navbar-links">
+        <a th:href="@{/dashboard}">Dashboard</a>
+        <a th:href="@{/profile}">Profile</a>
+        <a th:href="@{/education}">Education</a>
+        <a th:href="@{/experience}">Experience</a>
+        <a th:href="@{/skills}">Skills</a>
+        <a th:href="@{/certifications}">Certifications</a>
+        <a th:href="@{/projects}">Projects</a>
+        <a th:href="@{/achievements}">Achievements</a>
+        <a th:href="@{/resume/preview}" class="highlight">Preview &amp; Download</a>
+        <a th:href="@{/logout}" class="logout">Logout</a>
+    </div>
+</nav>

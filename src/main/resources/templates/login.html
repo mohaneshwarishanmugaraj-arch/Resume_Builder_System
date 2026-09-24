@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Resume Builder</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="auth-page">
+    <div class="auth-card">
+        <h1>Resume Builder</h1>
+        <p class="subtitle">Sign in to continue</p>
+
+        <p class="alert success" th:if="${registered}">Registration successful. Please log in.</p>
+        <p class="alert error" th:if="${error}" th:text="${error}"></p>
+
+        <form th:action="@{/login}" method="post">
+            <label>Email</label>
+            <input type="email" name="email" required autofocus/>
+
+            <label>Password</label>
+            <input type="password" name="password" required/>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <p class="auth-switch">New here? <a th:href="@{/register}">Create an account</a></p>
+        <p class="auth-hint">Admin demo login: admin@resumebuilder.com / Admin@123</p>
+    </div>
+</body>
+</html>

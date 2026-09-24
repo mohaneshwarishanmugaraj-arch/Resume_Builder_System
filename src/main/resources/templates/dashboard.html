@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Resume Builder</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: nav}"></div>
+<div class="page">
+    <h1>Welcome, <span th:text="${user.fullName}"></span> 👋</h1>
+    <p class="muted">Here's a quick snapshot of your resume so far.</p>
+
+    <div class="stat-grid">
+        <div class="stat-card">
+            <div class="stat-number" th:text="${#lists.size(user.educationList)}"></div>
+            <div class="stat-label">Education</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" th:text="${#lists.size(user.experienceList)}"></div>
+            <div class="stat-label">Experience</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" th:text="${#lists.size(user.skillList)}"></div>
+            <div class="stat-label">Skills</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" th:text="${#lists.size(user.certificationList)}"></div>
+            <div class="stat-label">Certifications</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" th:text="${#lists.size(user.projectList)}"></div>
+            <div class="stat-label">Projects</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" th:text="${#lists.size(user.achievementList)}"></div>
+            <div class="stat-label">Achievements</div>
+        </div>
+    </div>
+
+    <a th:href="@{/resume/preview}" class="btn-primary">Preview &amp; Download Resume</a>
+</div>
+</body>
+</html>

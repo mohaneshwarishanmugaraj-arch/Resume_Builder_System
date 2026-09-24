@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Education - Resume Builder</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: nav}"></div>
+<div class="page">
+    <h1>Education Details</h1>
+
+    <form th:action="@{/education/add}" th:object="${education}" method="post" class="form-card">
+        <div class="form-row">
+            <div>
+                <label>Degree</label>
+                <input type="text" th:field="*{degree}" placeholder="e.g. B.E. Computer Science" required/>
+            </div>
+            <div>
+                <label>Institution</label>
+                <input type="text" th:field="*{institution}" required/>
+            </div>
+        </div>
+        <div class="form-row">
+            <div>
+                <label>Board / University</label>
+                <input type="text" th:field="*{boardOrUniversity}"/>
+            </div>
+            <div>
+                <label>Year of Passing</label>
+                <input type="text" th:field="*{yearOfPassing}"/>
+            </div>
+            <div>
+                <label>Percentage / CGPA</label>
+                <input type="text" th:field="*{percentageOrCgpa}"/>
+            </div>
+        </div>
+        <button type="submit">Add Education</button>
+    </form>
+
+    <table class="data-table">
+        <thead>
+        <tr><th>Degree</th><th>Institution</th><th>Board/University</th><th>Year</th><th>Score</th><th></th></tr>
+        </thead>
+        <tbody>
+        <tr th:each="e : ${educationList}">
+            <td th:text="${e.degree}"></td>
+            <td th:text="${e.institution}"></td>
+            <td th:text="${e.boardOrUniversity}"></td>
+            <td th:text="${e.yearOfPassing}"></td>
+            <td th:text="${e.percentageOrCgpa}"></td>
+            <td>
+                <form th:action="@{/education/delete/{id}(id=${e.id})}" method="post">
+                    <button type="submit" class="btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - Resume Builder</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="auth-page">
+    <div class="auth-card">
+        <h1>Create Account</h1>
+        <p class="subtitle">Start building your resume</p>
+
+        <form th:action="@{/register}" th:object="${user}" method="post">
+            <label>Full Name</label>
+            <input type="text" th:field="*{fullName}" required/>
+            <p class="field-error" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></p>
+
+            <label>Email</label>
+            <input type="email" th:field="*{email}" required/>
+            <p class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+
+            <label>Password</label>
+            <input type="password" th:field="*{password}" required/>
+            <p class="field-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <p class="auth-switch">Already have an account? <a th:href="@{/login}">Login</a></p>
+    </div>
+</body>
+</html>

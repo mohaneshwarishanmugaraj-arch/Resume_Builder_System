@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Projects - Resume Builder</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: nav}"></div>
+<div class="page">
+    <h1>Projects</h1>
+
+    <form th:action="@{/projects/add}" th:object="${project}" method="post" class="form-card">
+        <label>Title</label>
+        <input type="text" th:field="*{title}" required/>
+
+        <label>Technologies Used</label>
+        <input type="text" th:field="*{technologiesUsed}" placeholder="e.g. Java, Spring Boot, MySQL"/>
+
+        <label>Project Link (optional)</label>
+        <input type="text" th:field="*{projectLink}" placeholder="GitHub / live demo URL"/>
+
+        <label>Description</label>
+        <textarea th:field="*{description}" rows="3"></textarea>
+
+        <button type="submit">Add Project</button>
+    </form>
+
+    <table class="data-table">
+        <thead><tr><th>Title</th><th>Technologies</th><th>Description</th><th></th></tr></thead>
+        <tbody>
+        <tr th:each="p : ${projectList}">
+            <td th:text="${p.title}"></td>
+            <td th:text="${p.technologiesUsed}"></td>
+            <td th:text="${p.description}"></td>
+            <td>
+                <form th:action="@{/projects/delete/{id}(id=${p.id})}" method="post">
+                    <button type="submit" class="btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
