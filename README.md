@@ -1,4 +1,4 @@
-# Resume Builder System (Project 50)
+# Resume Builder System
 
 A full-stack Java web application (Spring Boot + Thymeleaf) implementing all required modules:
 
